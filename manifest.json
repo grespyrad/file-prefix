@@ -1,0 +1,10 @@
+{
+    "id": "file-prefix",
+    "name": "File Prefix",
+    "version": "1.0.0",
+    "minAppVersion": "0.15.0",
+    "description": "Adds a context menu command to prefix notes with their creation datetime",
+    "author": "Your Name",
+    "authorUrl": "https://github.com/yourusername",
+    "isDesktopOnly": false
+}
