@@ -5,9 +5,6 @@ on:
     tags:
       - "*" # Triggers on any tag push
 
-env:
-  PLUGIN_NAME: file-prefix # my pugin ID
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -27,11 +24,6 @@ jobs:
       - name: Build plugin
         run: npm run build
 
-      - name: Prepare release assets
-        run: |
-          mkdir $PLUGIN_NAME
-          cp main.js manifest.json $PLUGIN_NAME
-
       - name: Create Github Release
         id: create_release
         uses: actions/create-release@v1
@@ -43,10 +35,22 @@ jobs:
           draft: false
           prerelease: false
 
-      - name: Upload Release Asset
+      - name: Upload manifest.json
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./${{ env.PLUGIN_NAME }}/*
+          asset_path: ./manifest.json
+          asset_name: manifest.json
+          asset_content_type: application/json
+
+      - name: Upload index.js
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./index.js
+          asset_name: index.js
+          asset_content_type: application/javascript
