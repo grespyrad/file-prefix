@@ -41,11 +41,11 @@ export default class FilePrefixPlugin extends Plugin {
                 return;
             }
 
-            // Format the date as YYYYMMDDHHmm
+            // Format the date as YYYYMMDD HHmm
             const date = new Date(stats.ctime);
             const prefix = date.getFullYear().toString() +
                 (date.getMonth() + 1).toString().padStart(2, '0') +
-                date.getDate().toString().padStart(2, '0') +
+                date.getDate().toString().padStart(2, '0') + " " +
                 date.getHours().toString().padStart(2, '0') +
                 date.getMinutes().toString().padStart(2, '0');
 
