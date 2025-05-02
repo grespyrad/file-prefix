@@ -31,7 +31,6 @@ jobs:
         run: |
           mkdir $PLUGIN_NAME
           cp main.js manifest.json $PLUGIN_NAME
-          zip -r $PLUGIN_NAME.zip $PLUGIN_NAME
 
       - name: Create Github Release
         id: create_release
@@ -50,6 +49,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./${{ env.PLUGIN_NAME }}.zip
-          asset_name: ${{ env.PLUGIN_NAME }}.zip
-          asset_content_type: application/zip
+          asset_path: ./${{ env.PLUGIN_NAME }}/*
